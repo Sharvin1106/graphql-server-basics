@@ -2,8 +2,12 @@ const { UserList } = require("../FakeData");
 
 const resolvers = {
   Query: {
-    users() {
+    users: () => {
       return UserList;
+    },
+    user: (_, args) => {
+      const id = args.id;
+      return UserList.find((user) => user.id === +id);
     },
   },
 };
