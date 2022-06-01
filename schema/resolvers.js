@@ -18,6 +18,22 @@ const resolvers = {
       return MovieList.find((movie) => movie.name === name);
     },
   },
+  User: {
+    favoriteMovies: () =>
+      MovieList.filter(
+        (movie) =>
+          movie.yearOfPublication >= 2000 && movie.yearOfPublication <= 2010
+      ),
+  },
+  Mutation: {
+    createUser: (_, args) => {
+      const user = args.input;
+      const lastId = UserList[UserList.length - 1].id;
+      user.id = lastId + 1;
+      UserList.push(user); 
+      return user
+    },
+  },
 };
 
 module.exports = { resolvers };
