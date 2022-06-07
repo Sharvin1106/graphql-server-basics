@@ -30,8 +30,21 @@ const resolvers = {
       const user = args.input;
       const lastId = UserList[UserList.length - 1].id;
       user.id = lastId + 1;
-      UserList.push(user); 
-      return user
+      UserList.push(user);
+      return user;
+    },
+    updateUser: (_, args) => {
+      const { id, newUsername } = args.input;
+      console.log(id);
+      let userUpdated;
+      UserList.forEach((user) => {
+        if (user.id === +id) {
+          user.username = newUsername;
+          userUpdated = user;
+          console.log("hello");
+        }
+      });
+      return userUpdated;
     },
   },
 };
